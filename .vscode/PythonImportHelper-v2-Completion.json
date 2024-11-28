@@ -64,6 +64,14 @@
         "documentation": {}
     },
     {
+        "label": "grafico_quartos_mais_reservados",
+        "importPath": "graphs",
+        "description": "graphs",
+        "isExtraImport": true,
+        "detail": "graphs",
+        "documentation": {}
+    },
+    {
         "label": "requests",
         "kind": 6,
         "isExtraImport": true,
@@ -195,6 +203,15 @@
         "importPath": "graphs",
         "description": "graphs",
         "peekOfCode": "def grafico_hoteis_mais_reservados():\n    # reservas = requests.get(url)\n    # if reservas.status_code != 200:\n    #     print(\"Erro: Não foi possível acessar a API\")\n    #     return\n    # reservas = reservas.json()\n    # hoteis = requests.get(\"http://localhost:3000/hotels\").json()\n    # Pegar as reservas e descobrir o nome do hotel a qual pertencem usando a relação,\n    # depois montar gráfico com o nome do hotel no eixo x e o número de reservas marcadas nele no eixo y.\n    reservas = [",
+        "detail": "graphs",
+        "documentation": {}
+    },
+    {
+        "label": "grafico_quartos_mais_reservados",
+        "kind": 2,
+        "importPath": "graphs",
+        "description": "graphs",
+        "peekOfCode": "def grafico_quartos_mais_reservados(): \n    hotel = int(input(\"Hotel: \"))\n    reservas = [\n        {\"roomId\": 101},\n        {\"roomId\": 101},\n        {\"roomId\": 201},\n        {\"roomId\": 301},\n        {\"roomId\": 101},\n        {\"roomId\": 201}\n    ]",
         "detail": "graphs",
         "documentation": {}
     }

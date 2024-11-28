@@ -1,5 +1,5 @@
 from crud import alteracao, exclusao, inclusao, listagem, login, titulo
-from graphs import grafico_hoteis_mais_reservados
+from graphs import grafico_hoteis_mais_reservados, grafico_quartos_mais_reservados
 
 
 
@@ -11,9 +11,10 @@ while True:
     print("4. Alteração de RoomId")
     print("5. Exclusão de Reserva")
     print("6. Hotéis mais reservados (Gráfico)")
-    print("7. Gráfico de qtdDiass (Pizza)")
+    print("7. Quartos mais reservados (Gráfico)")
     print("9. Finalizar")
     opcao = int(input("Opção: "))
+
     if opcao == 1:
         login()
     elif opcao == 2:
@@ -27,6 +28,6 @@ while True:
     elif opcao == 6:
         grafico_hoteis_mais_reservados()
     elif opcao == 7:
-        print("ainda nao")
+        grafico_quartos_mais_reservados()
     else:
         break
