@@ -236,7 +236,7 @@
         "kind": 2,
         "importPath": "graphs",
         "description": "graphs",
-        "peekOfCode": "def grafico_quartos_mais_reservados():\n    # TO-DO: mudar a api pra que quartos não possam só ter 1 reserva\n    hotel = int(input(\"Id do hotel: \"))\n    todasReservas = requests.get(url).json()\n    reservas = []\n    for r in todasReservas:\n        if int(r['hotelId']) == hotel:\n            reservas.append(r)\n    print(reservas)\n    quarto_reservas = {}",
+        "peekOfCode": "def grafico_quartos_mais_reservados():\n    hotel = int(input(\"Id do hotel: \"))\n    todasReservas = requests.get(url).json()\n    reservas = []\n    for r in todasReservas:\n        if int(r['hotelId']) == hotel:\n            reservas.append(r)\n    print(reservas)\n    quarto_reservas = {}\n    for r in reservas:",
         "detail": "graphs",
         "documentation": {}
     },

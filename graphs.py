@@ -51,10 +51,7 @@ import requests
 import matplotlib.pyplot as plt
 import numpy as np
 
-
 def grafico_quartos_mais_reservados():
-    # TO-DO: mudar a api pra que quartos não possam só ter 1 reserva
-
     hotel = int(input("Id do hotel: "))
 
 
@@ -83,20 +80,35 @@ def grafico_quartos_mais_reservados():
     reservas_count = [quarto[1] for quarto in quartos_ordenados]
     numeros_quartos = [next(r['room']['number'] for r in reservas if r['room']['id'] == id_quarto) for id_quarto in ids_quartos]
 
+
     fig, ax = plt.subplots()
-
-
-    bar_colors = ['tab:red', 'tab:blue', 'tab:orange']
-
-    x_pos = np.arange(len(ids_quartos))
-    ax.bar(x_pos, reservas_count, color=bar_colors)
-    ax.set_xticks(x_pos)
-    ax.set_xticklabels(numeros_quartos)
-    ax.set_xlabel('Número do Quarto')
-    ax.set_ylabel('Número de Reservas')
+    y_pos = np.arange(len(ids_quartos))
+    ax.barh(y_pos, reservas_count, align='center')
+    ax.set_yticks(y_pos, labels=numeros_quartos) 
+    ax.set_xlabel('Número de Reservas')
     ax.set_title(f'Quartos mais reservados no hotel {hotel}')
 
     plt.show()
+
+
+
+
+# Se posteriormente der pau, dá pra usar:
+
+    # fig, ax = plt.subplots()
+
+    # bar_colors = ['tab:red', 'tab:blue', 'tab:orange']
+
+    # x_pos = np.arange(len(ids_quartos))
+    # ax.bar(x_pos, reservas_count, color=bar_colors)
+    # ax.set_xticks(x_pos)
+    # ax.set_xticklabels(numeros_quartos)
+    # ax.set_xlabel('Número do Quarto')
+    # ax.set_ylabel('Número de Reservas')
+    # ax.set_title(f'Quartos mais reservados no hotel {hotel}')
+
+    # plt.show()
+    
 
 
 
