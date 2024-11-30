@@ -11,7 +11,7 @@ while True:
     print("5. Exclusão de Reserva")
     print("6. Hotéis mais reservados (Gráfico)")
     print("7. Quartos mais reservados (Gráfico)")
-    print("9. Finalizar")
+    print("0. Finalizar")
     opcao = int(input("Opção: "))
 
     if opcao == 1:
