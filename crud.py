@@ -10,35 +10,8 @@ def titulo(texto, traco="-"):
 url = "http://localhost:3000/reservations"
 url_login = "http://localhost:3000/login"
 
-usuario_id = ""
-token = ""
-
-
-def login():
-    # {
-    #     lorenzo@gmail.com
-    #     Lo12345@
-    # }
-
-    titulo("Login do Usuário")
-
-    email = input("E-mail...: ")
-    senha = pwinput.pwinput(prompt='Senha....: ')
-
-    response = requests.post(url_login, json={
-        "email": email,
-        "senha": senha
-    })
-
-    if response.status_code == 200:
-        resposta = response.json()
-        global usuario_id
-        global token
-        usuario_id = resposta['id']
-        token = resposta['token']
-        print(f"Bem vindo de volta, {resposta['nome']}")
-    else:
-        print("Email ou senha incorretos")
+usuario_id = "3"
+token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTG9nSWQiOjMsInVzZXJMb2dOYW1lIjoiTG9yZW56byIsImlhdCI6MTczMjk5NzkxNywiZXhwIjoxNzMzMDAxNTE3fQ.ppUrR45HcjYAzJwpXXcgRcmbjnOVPdqF1rP9NOG9Ewk"
 
 
 
@@ -51,14 +24,6 @@ def inclusao():
         print("Você precisa ter feito login para fazer uma reserva")
         return
 
-
-# {
-#     id,
-#     descricao,
-#     qtdDias,
-#     userId,
-#     roomId
-# }
 
     descricao = input("Descricao......: ")
     qtdDias = input("qtdDias.......: ")

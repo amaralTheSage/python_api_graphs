@@ -1,7 +1,6 @@
-from crud import alteracao, exclusao, inclusao, listagem, login, titulo
+from crud import alteracao, exclusao, inclusao, listagem, titulo
 from graphs import grafico_hoteis_mais_reservados, grafico_quartos_mais_reservados
-
-
+from login import login
 
 while True:
     titulo("Reservas em Hóteis")

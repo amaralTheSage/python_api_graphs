@@ -1,37 +1,18 @@
 import matplotlib.pyplot as plt
 from crud import url  # type: ignore
 import numpy as np
+import requests
 
 # BARRAS
 def grafico_hoteis_mais_reservados():
-    # reservas = requests.get(url)
+    reservas = requests.get(url).json()
 
     # if reservas.status_code != 200:
     #     print("Erro: Não foi possível acessar a API")
     #     return
 
-    # reservas = reservas.json()
-
-    # hoteis = requests.get("http://localhost:3000/hotels").json()
-
-    # Pegar as reservas e descobrir o nome do hotel a qual pertencem usando a relação,
-    # depois montar gráfico com o nome do hotel no eixo x e o número de reservas marcadas nele no eixo y.
+    hoteis = requests.get("http://localhost:3000/hotels").json()
   
-    reservas = [
-        {"hotelId": 1, "roomId": 101},
-        {"hotelId": 1, "roomId": 102},
-        {"hotelId": 2, "roomId": 201},
-        {"hotelId": 3, "roomId": 301},
-        {"hotelId": 1, "roomId": 103},
-        {"hotelId": 2, "roomId": 202}
-    ]
-
-    hoteis = [
-        {"id": 1, "name": "Hotel A"},
-        {"id": 2, "name": "Hotel B"},
-        {"id": 3, "name": "Hotel C"}
-    ]
-
     x = [] 
     y = []  
 
@@ -48,10 +29,7 @@ def grafico_hoteis_mais_reservados():
             x.append(h['name'])  
             y.append(hotel_reservas[h['id']])  
 
-    
-    
     fig, ax = plt.subplots()
-
 
     bar_colors = ['tab:red', 'tab:blue', 'tab:orange']
 
@@ -64,44 +42,61 @@ def grafico_hoteis_mais_reservados():
 
 
 
-def grafico_quartos_mais_reservados(): 
-    hotel = int(input("Hotel: "))
+#################################################################
+import requests
+import matplotlib.pyplot as plt
+import numpy as np
 
-    reservas = [
-        {"roomId": 101},
-        {"roomId": 101},
-        {"roomId": 201},
-        {"roomId": 301},
-        {"roomId": 101},
-        {"roomId": 201}
-    ]
+import requests
+import matplotlib.pyplot as plt
+import numpy as np
 
-    x = [] 
-    y = []  
+
+def grafico_quartos_mais_reservados():
+    # TO-DO: mudar a api pra que quartos não possam só ter 1 reserva
+
+    hotel = int(input("Id do hotel: "))
+
+
+    todasReservas = requests.get(url).json()
+
+    reservas = []
+
+    for r in todasReservas:
+        if int(r['hotelId']) == hotel:
+            reservas.append(r)
+
+
+    print(reservas)
 
     quarto_reservas = {}
 
     for r in reservas:
-        room_id = r['roomId']
+        room_id = r["room"]["id"]  
         if room_id not in quarto_reservas:
-            quarto_reservas[room_id] = 0 
-        quarto_reservas[room_id] += 1  
+            quarto_reservas[room_id] = 0
+        quarto_reservas[room_id] += 1
 
-    for room_id, count in quarto_reservas.items():
-        y.append(room_id) 
-        x.append(count)
-    
-    # Fixing random state for reproducibility
+    quartos_ordenados = sorted(quarto_reservas.items(), key=lambda x: x[1], reverse=True)
+
+    ids_quartos = [quarto[0] for quarto in quartos_ordenados]
+    reservas_count = [quarto[1] for quarto in quartos_ordenados]
+    numeros_quartos = [next(r['room']['number'] for r in reservas if r['room']['id'] == id_quarto) for id_quarto in ids_quartos]
 
     fig, ax = plt.subplots()
 
-    y_pos = np.arange(len(y))
-    error = np.random.rand(len(y))
 
-    ax.barh(y_pos, y, xerr=error, align='center')
-    ax.set_yticks(y_pos, labels=y)
-    ax.invert_yaxis()
-    ax.set_xlabel('Reservas')
-    ax.set_title('Quartos mais reservados')
+    bar_colors = ['tab:red', 'tab:blue', 'tab:orange']
+
+    x_pos = np.arange(len(ids_quartos))
+    ax.bar(x_pos, reservas_count, color=bar_colors)
+    ax.set_xticks(x_pos)
+    ax.set_xticklabels(numeros_quartos)
+    ax.set_xlabel('Número do Quarto')
+    ax.set_ylabel('Número de Reservas')
+    ax.set_title(f'Quartos mais reservados no hotel {hotel}')
 
     plt.show()
+
+
+

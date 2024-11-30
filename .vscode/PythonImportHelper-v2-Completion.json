@@ -32,7 +32,15 @@
         "documentation": {}
     },
     {
-        "label": "login",
+        "label": "titulo",
+        "importPath": "crud",
+        "description": "crud",
+        "isExtraImport": true,
+        "detail": "crud",
+        "documentation": {}
+    },
+    {
+        "label": "url",
         "importPath": "crud",
         "description": "crud",
         "isExtraImport": true,
@@ -48,7 +56,7 @@
         "documentation": {}
     },
     {
-        "label": "url",
+        "label": "url_login",
         "importPath": "crud",
         "description": "crud",
         "isExtraImport": true,
@@ -69,6 +77,14 @@
         "description": "graphs",
         "isExtraImport": true,
         "detail": "graphs",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "importPath": "login",
+        "description": "login",
+        "isExtraImport": true,
+        "detail": "login",
         "documentation": {}
     },
     {
@@ -108,20 +124,29 @@
         "documentation": {}
     },
     {
+        "label": "reservas",
+        "kind": 5,
+        "importPath": "tmp.test_data",
+        "description": "tmp.test_data",
+        "peekOfCode": "reservas = [\n        {\"hotelId\": 1, \"roomId\": 101},\n        {\"hotelId\": 1, \"roomId\": 102},\n        {\"hotelId\": 2, \"roomId\": 201},\n        {\"hotelId\": 3, \"roomId\": 301},\n        {\"hotelId\": 1, \"roomId\": 103},\n        {\"hotelId\": 2, \"roomId\": 202}\n    ]\nhoteis = [\n        {\"id\": 1, \"name\": \"Hotel A\"},",
+        "detail": "tmp.test_data",
+        "documentation": {}
+    },
+    {
+        "label": "hoteis",
+        "kind": 5,
+        "importPath": "tmp.test_data",
+        "description": "tmp.test_data",
+        "peekOfCode": "hoteis = [\n        {\"id\": 1, \"name\": \"Hotel A\"},\n        {\"id\": 2, \"name\": \"Hotel B\"},\n        {\"id\": 3, \"name\": \"Hotel C\"}\n    ]",
+        "detail": "tmp.test_data",
+        "documentation": {}
+    },
+    {
         "label": "titulo",
         "kind": 2,
         "importPath": "crud",
         "description": "crud",
-        "peekOfCode": "def titulo(texto, traco=\"-\"):\n    print()\n    print(texto)\n    print(traco*40)\nurl = \"http://localhost:3000/reservations\"\nurl_login = \"http://localhost:3000/login\"\nusuario_id = \"\"\ntoken = \"\"\ndef login():\n    # {",
-        "detail": "crud",
-        "documentation": {}
-    },
-    {
-        "label": "login",
-        "kind": 2,
-        "importPath": "crud",
-        "description": "crud",
-        "peekOfCode": "def login():\n    # {\n    #     lorenzo@gmail.com\n    #     Lo12345@\n    # }\n    titulo(\"Login do Usuário\")\n    email = input(\"E-mail...: \")\n    senha = pwinput.pwinput(prompt='Senha....: ')\n    response = requests.post(url_login, json={\n        \"email\": email,",
+        "peekOfCode": "def titulo(texto, traco=\"-\"):\n    print()\n    print(texto)\n    print(traco*40)\nurl = \"http://localhost:3000/reservations\"\nurl_login = \"http://localhost:3000/login\"\nusuario_id = \"3\"\ntoken = \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTG9nSWQiOjMsInVzZXJMb2dOYW1lIjoiTG9yZW56byIsImlhdCI6MTczMjk5NzkxNywiZXhwIjoxNzMzMDAxNTE3fQ.ppUrR45HcjYAzJwpXXcgRcmbjnOVPdqF1rP9NOG9Ewk\"\n#### POST\ndef inclusao():",
         "detail": "crud",
         "documentation": {}
     },
@@ -130,7 +155,7 @@
         "kind": 2,
         "importPath": "crud",
         "description": "crud",
-        "peekOfCode": "def inclusao():\n    titulo(\"Fazer uma reserva\", \"=\")\n    if token == \"\":\n        print(\"Você precisa ter feito login para fazer uma reserva\")\n        return\n# {\n#     id,\n#     descricao,\n#     qtdDias,\n#     userId,",
+        "peekOfCode": "def inclusao():\n    titulo(\"Fazer uma reserva\", \"=\")\n    if token == \"\":\n        print(\"Você precisa ter feito login para fazer uma reserva\")\n        return\n    descricao = input(\"Descricao......: \")\n    qtdDias = input(\"qtdDias.......: \")\n    userId = int(input(\"userId.........: \"))\n    roomId = int(input(\"roomId: \"))\n    response = requests.post(url,",
         "detail": "crud",
         "documentation": {}
     },
@@ -166,7 +191,7 @@
         "kind": 5,
         "importPath": "crud",
         "description": "crud",
-        "peekOfCode": "url = \"http://localhost:3000/reservations\"\nurl_login = \"http://localhost:3000/login\"\nusuario_id = \"\"\ntoken = \"\"\ndef login():\n    # {\n    #     lorenzo@gmail.com\n    #     Lo12345@\n    # }\n    titulo(\"Login do Usuário\")",
+        "peekOfCode": "url = \"http://localhost:3000/reservations\"\nurl_login = \"http://localhost:3000/login\"\nusuario_id = \"3\"\ntoken = \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTG9nSWQiOjMsInVzZXJMb2dOYW1lIjoiTG9yZW56byIsImlhdCI6MTczMjk5NzkxNywiZXhwIjoxNzMzMDAxNTE3fQ.ppUrR45HcjYAzJwpXXcgRcmbjnOVPdqF1rP9NOG9Ewk\"\n#### POST\ndef inclusao():\n    titulo(\"Fazer uma reserva\", \"=\")\n    if token == \"\":\n        print(\"Você precisa ter feito login para fazer uma reserva\")\n        return",
         "detail": "crud",
         "documentation": {}
     },
@@ -175,7 +200,7 @@
         "kind": 5,
         "importPath": "crud",
         "description": "crud",
-        "peekOfCode": "url_login = \"http://localhost:3000/login\"\nusuario_id = \"\"\ntoken = \"\"\ndef login():\n    # {\n    #     lorenzo@gmail.com\n    #     Lo12345@\n    # }\n    titulo(\"Login do Usuário\")\n    email = input(\"E-mail...: \")",
+        "peekOfCode": "url_login = \"http://localhost:3000/login\"\nusuario_id = \"3\"\ntoken = \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTG9nSWQiOjMsInVzZXJMb2dOYW1lIjoiTG9yZW56byIsImlhdCI6MTczMjk5NzkxNywiZXhwIjoxNzMzMDAxNTE3fQ.ppUrR45HcjYAzJwpXXcgRcmbjnOVPdqF1rP9NOG9Ewk\"\n#### POST\ndef inclusao():\n    titulo(\"Fazer uma reserva\", \"=\")\n    if token == \"\":\n        print(\"Você precisa ter feito login para fazer uma reserva\")\n        return\n    descricao = input(\"Descricao......: \")",
         "detail": "crud",
         "documentation": {}
     },
@@ -184,7 +209,7 @@
         "kind": 5,
         "importPath": "crud",
         "description": "crud",
-        "peekOfCode": "usuario_id = \"\"\ntoken = \"\"\ndef login():\n    # {\n    #     lorenzo@gmail.com\n    #     Lo12345@\n    # }\n    titulo(\"Login do Usuário\")\n    email = input(\"E-mail...: \")\n    senha = pwinput.pwinput(prompt='Senha....: ')",
+        "peekOfCode": "usuario_id = \"3\"\ntoken = \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTG9nSWQiOjMsInVzZXJMb2dOYW1lIjoiTG9yZW56byIsImlhdCI6MTczMjk5NzkxNywiZXhwIjoxNzMzMDAxNTE3fQ.ppUrR45HcjYAzJwpXXcgRcmbjnOVPdqF1rP9NOG9Ewk\"\n#### POST\ndef inclusao():\n    titulo(\"Fazer uma reserva\", \"=\")\n    if token == \"\":\n        print(\"Você precisa ter feito login para fazer uma reserva\")\n        return\n    descricao = input(\"Descricao......: \")\n    qtdDias = input(\"qtdDias.......: \")",
         "detail": "crud",
         "documentation": {}
     },
@@ -193,7 +218,7 @@
         "kind": 5,
         "importPath": "crud",
         "description": "crud",
-        "peekOfCode": "token = \"\"\ndef login():\n    # {\n    #     lorenzo@gmail.com\n    #     Lo12345@\n    # }\n    titulo(\"Login do Usuário\")\n    email = input(\"E-mail...: \")\n    senha = pwinput.pwinput(prompt='Senha....: ')\n    response = requests.post(url_login, json={",
+        "peekOfCode": "token = \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTG9nSWQiOjMsInVzZXJMb2dOYW1lIjoiTG9yZW56byIsImlhdCI6MTczMjk5NzkxNywiZXhwIjoxNzMzMDAxNTE3fQ.ppUrR45HcjYAzJwpXXcgRcmbjnOVPdqF1rP9NOG9Ewk\"\n#### POST\ndef inclusao():\n    titulo(\"Fazer uma reserva\", \"=\")\n    if token == \"\":\n        print(\"Você precisa ter feito login para fazer uma reserva\")\n        return\n    descricao = input(\"Descricao......: \")\n    qtdDias = input(\"qtdDias.......: \")\n    userId = int(input(\"userId.........: \"))",
         "detail": "crud",
         "documentation": {}
     },
@@ -202,7 +227,7 @@
         "kind": 2,
         "importPath": "graphs",
         "description": "graphs",
-        "peekOfCode": "def grafico_hoteis_mais_reservados():\n    # reservas = requests.get(url)\n    # if reservas.status_code != 200:\n    #     print(\"Erro: Não foi possível acessar a API\")\n    #     return\n    # reservas = reservas.json()\n    # hoteis = requests.get(\"http://localhost:3000/hotels\").json()\n    # Pegar as reservas e descobrir o nome do hotel a qual pertencem usando a relação,\n    # depois montar gráfico com o nome do hotel no eixo x e o número de reservas marcadas nele no eixo y.\n    reservas = [",
+        "peekOfCode": "def grafico_hoteis_mais_reservados():\n    reservas = requests.get(url).json()\n    # if reservas.status_code != 200:\n    #     print(\"Erro: Não foi possível acessar a API\")\n    #     return\n    hoteis = requests.get(\"http://localhost:3000/hotels\").json()\n    x = [] \n    y = []  \n    hotel_reservas = {}\n    for r in reservas:",
         "detail": "graphs",
         "documentation": {}
     },
@@ -211,8 +236,17 @@
         "kind": 2,
         "importPath": "graphs",
         "description": "graphs",
-        "peekOfCode": "def grafico_quartos_mais_reservados(): \n    hotel = int(input(\"Hotel: \"))\n    reservas = [\n        {\"roomId\": 101},\n        {\"roomId\": 101},\n        {\"roomId\": 201},\n        {\"roomId\": 301},\n        {\"roomId\": 101},\n        {\"roomId\": 201}\n    ]",
+        "peekOfCode": "def grafico_quartos_mais_reservados():\n    # TO-DO: mudar a api pra que quartos não possam só ter 1 reserva\n    hotel = int(input(\"Id do hotel: \"))\n    todasReservas = requests.get(url).json()\n    reservas = []\n    for r in todasReservas:\n        if int(r['hotelId']) == hotel:\n            reservas.append(r)\n    print(reservas)\n    quarto_reservas = {}",
         "detail": "graphs",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "kind": 2,
+        "importPath": "login",
+        "description": "login",
+        "peekOfCode": "def login():\n    # {\n    #     lorenzo@gmail.com\n    #     Lo12345@\n    # }\n    titulo(\"Login do Usuário\")\n    email = input(\"E-mail...: \")\n    senha = pwinput.pwinput(prompt='Senha....: ')\n    response = requests.post(url_login, json={\n        \"email\": email,",
+        "detail": "login",
         "documentation": {}
     }
 ]
