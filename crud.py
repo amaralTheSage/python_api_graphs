@@ -10,8 +10,8 @@ def titulo(texto, traco="-"):
 url = "http://localhost:3000/reservations"
 url_login = "http://localhost:3000/login"
 
-usuario_id = "3"
-token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTG9nSWQiOjMsInVzZXJMb2dOYW1lIjoiTG9yZW56byIsImlhdCI6MTczMjk5NzkxNywiZXhwIjoxNzMzMDAxNTE3fQ.ppUrR45HcjYAzJwpXXcgRcmbjnOVPdqF1rP9NOG9Ewk"
+usuario_id = 1
+token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTG9nSWQiOjEsInVzZXJMb2dOYW1lIjoiTG9yZW56byIsImlhdCI6MTczMzAwNzIwMCwiZXhwIjoxNzMzMDEwODAwfQ.4y8F2PVY7mI3IUaosTnTFUatfbOacxk2pimbtHN6z4k"
 
 
 
@@ -26,24 +26,23 @@ def inclusao():
 
 
     descricao = input("Descricao......: ")
-    qtdDias = input("qtdDias.......: ")
-    userId = int(input("userId.........: "))
+    qtdDias = int(input("qtdDias.......: "))
     roomId = int(input("roomId: "))
+    hotelId = int(input("hotelId: "))
 
     response = requests.post(url,
                              headers={"Authorization": f"Bearer {token}"},
                              json={
                                  "descricao": descricao,
                                  "qtdDias": qtdDias,
-                                 "userId": userId,
+                                 "userId": usuario_id,
                                  "roomId": roomId,
+                                 "hotelId": hotelId,
                              })
+    
+    reserva = response.json()
+    print(reserva)
 
-    if response.status_code == 201:
-        reserva = response.json()
-        print(f"Ok! Reserva cadastrado com código: {reserva['id']}")
-    else:
-        print("Erro... Não foi possível incluir o reserva")
 
 
 
@@ -64,7 +63,7 @@ def listagem():
 
     for reserva in reservas:
         print(
-            f"{reserva['id']:4d} {reserva['descricao']:20s} {reserva['qtdDias']:15s} {reserva['userId']:4d} {reserva['roomId']:9.2f}")
+            f"{reserva['id']:4d} {reserva['descricao']:20s} {reserva['qtdDias']:4d} {reserva['userId']:4d} {reserva['roomId']:9.2f}")
 
 
 
@@ -72,7 +71,7 @@ def listagem():
 def alteracao():
     listagem()
 
-    if token == "":
+    if not token:
         print("Você precisa estar logado para alterar reservas")
         return
 
@@ -90,19 +89,15 @@ def alteracao():
     print(f"\nDescricao..: {reserva[0]['descricao']}")
     print(f"qtdDias...: {reserva[0]['qtdDias']}")
     print(f"userId.....: {reserva[0]['userId']}")
-    print(f"RoomId: {float(reserva[0]['roomId']):9.2f}")
+    print(f"RoomId: {float(reserva[0]['roomId'])}")
 
     novaQtdDias = int(input("Nova quantidade de dias: "))
 
     response = requests.put(url+"/"+str(id),
                               headers={"Authorization": f"Bearer {token}"},
                               json={"qtdDias": novaQtdDias})
-
-    if response.status_code == 200:
-        reserva = response.json()
-        print("Ok! Reserva alterado com sucesso!")
-    else:
-        print("Não foi possível alterar a quantidade de dias da reserva")
+     
+    print(response.json())
 
 
 

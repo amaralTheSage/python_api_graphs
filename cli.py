@@ -7,7 +7,7 @@ while True:
     print("1. Login do Usuário")
     print("2. Inclusão de Reservas")
     print("3. Listagem de Reservas")
-    print("4. Alteração de RoomId")
+    print("4. Mudar quantidade de dias")
     print("5. Exclusão de Reserva")
     print("6. Hotéis mais reservados (Gráfico)")
     print("7. Quartos mais reservados (Gráfico)")

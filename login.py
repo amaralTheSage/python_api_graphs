@@ -11,11 +11,11 @@ def login():
     titulo("Login do Usuário")
 
     email = input("E-mail...: ")
-    senha = pwinput.pwinput(prompt='Senha....: ')
+    password = pwinput.pwinput(prompt='Senha....: ')
 
     response = requests.post(url_login, json={
         "email": email,
-        "senha": senha
+        "password": password
     })
 
     if response.status_code == 200:
@@ -24,6 +24,6 @@ def login():
         global token
         usuario_id = resposta['id']
         token = resposta['token']
-        print(f"Bem vindo de volta, {resposta['nome']}")
+        print(f"Bem vindo de volta, {resposta['name']}")
     else:
         print("Email ou senha incorretos")
