@@ -2,23 +2,24 @@ import requests
 import matplotlib.pyplot as plt
 import numpy as np
 import pwinput # type: ignore
-def titulo(texto, traco="-"):
+def titulo(texto):
     print()
     print(texto)
-    print(traco*40)
+    print("-" * 55) 
+    
 
 url = "http://localhost:3000/reservations"
 url_login = "http://localhost:3000/login"
 
-usuario_id = 1
-token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTG9nSWQiOjEsInVzZXJMb2dOYW1lIjoiTG9yZW56byIsImlhdCI6MTczMzAwNzIwMCwiZXhwIjoxNzMzMDEwODAwfQ.4y8F2PVY7mI3IUaosTnTFUatfbOacxk2pimbtHN6z4k"
+usuario_id = 0
+token = ""
 
 
 
 
 #### POST
 def inclusao():
-    titulo("Fazer uma reserva", "=")
+    titulo("Fazer uma reserva")
 
     if token == "":
         print("Você precisa ter feito login para fazer uma reserva")
@@ -58,16 +59,16 @@ def listagem():
 
     reservas = response.json()
 
-    print("Id....: Descricao.............: qtdDias.........: userId.........: roomId...:")
-    print("----------------------------------------------------------------------------")
+    print(f"{'Id':<4} {'Descricao':<20} {'QtdDias':<10} {'UserId':<10} {'RoomId':<10}")
+    print("-" * 55) 
 
     for reserva in reservas:
-        print(
-            f"{reserva['id']:4d} {reserva['descricao']:20s} {reserva['qtdDias']:4d} {reserva['userId']:4d} {reserva['roomId']:9.2f}")
+        print(f"{reserva['id']:<4} {reserva['descricao']:<20} {reserva['qtdDias']:<10} {reserva['userId']:<10} {reserva['room']['id']:<10}")
 
 
 
 #### UPDATE
+#### BUG
 def alteracao():
     listagem()
 
@@ -75,25 +76,25 @@ def alteracao():
         print("Você precisa estar logado para alterar reservas")
         return
 
-    id = int(input("\nQual o ID da reserva a ser alterada? (0 para sair)"))
+    id = int(input("\nQual o ID da reserva a ser alterada? (0 para sair) -- "))
 
-    response = requests.get(url)
-    reservas = response.json()
+    reserva = requests.get(f"{url}/{id}").json()
+    
+    
+    # reserva = [x for x in reservas if x['id'] == id]
 
-    reserva = [x for x in reservas if x['id'] == id]
+    # if not reserva:
+    #     print("Erro. Informe um código existente")
+    #     return
 
-    if len(reserva) == 0:
-        print("Erro. Informe um código existente")
-        return
-
-    print(f"\nDescricao..: {reserva[0]['descricao']}")
-    print(f"qtdDias...: {reserva[0]['qtdDias']}")
-    print(f"userId.....: {reserva[0]['userId']}")
-    print(f"RoomId: {float(reserva[0]['roomId'])}")
+    print(f"\nDescricao..: {reserva['descricao']}")
+    print(f"qtdDias...: {reserva['qtdDias']}")
+    print(f"userId.....: {reserva['userId']}")
+    print(f"RoomId: {(reserva['roomId'])}")
 
     novaQtdDias = int(input("Nova quantidade de dias: "))
 
-    response = requests.put(url+"/"+str(id),
+    response = requests.put(f"{url}/{id}",
                               headers={"Authorization": f"Bearer {token}"},
                               json={"qtdDias": novaQtdDias})
      

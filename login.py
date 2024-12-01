@@ -25,5 +25,6 @@ def login():
         usuario_id = resposta['id']
         token = resposta['token']
         print(f"Bem vindo de volta, {resposta['name']}")
+        print(f"Token: {resposta['token']}")
     else:
         print("Email ou senha incorretos")
