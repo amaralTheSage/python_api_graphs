@@ -1,30 +1,20 @@
 import requests
 import matplotlib.pyplot as plt
 import numpy as np
-import pwinput # type: ignore
-def titulo(texto):
-    print()
-    print(texto)
-    print("-" * 55) 
-    
+from login import get_token, get_usuario_id, token, usuario_id
+from utils.titulo import titulo
+
 
 url = "http://localhost:3000/reservations"
-url_login = "http://localhost:3000/login"
-
-usuario_id = 0
-token = ""
-
-
-
 
 #### POST
 def inclusao():
     titulo("Fazer uma reserva")
 
-    if token == "":
+    print(f"usuario_id: {get_usuario_id()}, token: {get_token()}")
+    if get_token() == "":
         print("Você precisa ter feito login para fazer uma reserva")
         return
-
 
     descricao = input("Descricao......: ")
     qtdDias = int(input("qtdDias.......: "))
@@ -32,11 +22,11 @@ def inclusao():
     hotelId = int(input("hotelId: "))
 
     response = requests.post(url,
-                             headers={"Authorization": f"Bearer {token}"},
+                             headers={"Authorization": f"Bearer {get_token()}"},
                              json={
                                  "descricao": descricao,
                                  "qtdDias": qtdDias,
-                                 "userId": usuario_id,
+                                 "userId": get_usuario_id(),
                                  "roomId": roomId,
                                  "hotelId": hotelId,
                              })
@@ -59,20 +49,19 @@ def listagem():
 
     reservas = response.json()
 
-    print(f"{'Id':<4} {'Descricao':<20} {'QtdDias':<10} {'UserId':<10} {'RoomId':<10}")
-    print("-" * 55) 
+    print(f"{'Id':<4} {'Descricao':<20} {'QtdDias':<10} {'UserId':<10} {'RoomId':<10}  {'HotelId':<10}")
+    print("-" * 74) 
 
     for reserva in reservas:
-        print(f"{reserva['id']:<4} {reserva['descricao']:<20} {reserva['qtdDias']:<10} {reserva['userId']:<10} {reserva['room']['id']:<10}")
+        print(f"{reserva['id']:<4} {reserva['descricao']:<20} {reserva['qtdDias']:<10} {reserva['userId']:<10} {reserva['room']['id']:<10} {reserva['hotel']['id']:<10}")
 
 
 
 #### UPDATE
-#### BUG
 def alteracao():
     listagem()
 
-    if not token:
+    if not get_token():
         print("Você precisa estar logado para alterar reservas")
         return
 
@@ -80,13 +69,6 @@ def alteracao():
 
     reserva = requests.get(f"{url}/{id}").json()
     
-    
-    # reserva = [x for x in reservas if x['id'] == id]
-
-    # if not reserva:
-    #     print("Erro. Informe um código existente")
-    #     return
-
     print(f"\nDescricao..: {reserva['descricao']}")
     print(f"qtdDias...: {reserva['qtdDias']}")
     print(f"userId.....: {reserva['userId']}")
@@ -95,7 +77,7 @@ def alteracao():
     novaQtdDias = int(input("Nova quantidade de dias: "))
 
     response = requests.put(f"{url}/{id}",
-                              headers={"Authorization": f"Bearer {token}"},
+                              headers={"Authorization": f"Bearer {get_token()}"},
                               json={"qtdDias": novaQtdDias})
      
     print(response.json())
@@ -104,13 +86,13 @@ def alteracao():
 
 #### DELETE
 def exclusao():
-    if token == "":
+    if get_token() == "":
         print("Você precisa estar logado para excluir reservas")
         return
 
     listagem()
 
-    id = int(input("\nQual o ID da reserva a ser excluida? (0 para sair)"))
+    id = int(input("\nQual o ID da reserva a ser excluida? (0 para sair) -- "))
 
     if id == 0:
         return
@@ -133,7 +115,7 @@ def exclusao():
 
     if confirma == "S":
         response = requests.delete(url+"/"+str(id), 
-                                   headers={"Authorization": f"Bearer {token}"})
+                                   headers={"Authorization": f"Bearer {get_token()}"})
 
         if response.status_code == 200:
             reserva = response.json()

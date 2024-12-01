@@ -7,10 +7,6 @@ import requests
 def grafico_hoteis_mais_reservados():
     reservas = requests.get(url).json()
 
-    # if reservas.status_code != 200:
-    #     print("Erro: Não foi possível acessar a API")
-    #     return
-
     hoteis = requests.get("http://localhost:3000/hotels").json()
   
     x = [] 
@@ -27,7 +23,7 @@ def grafico_hoteis_mais_reservados():
 
     for h in hoteis:
             x.append(h['name'])  
-            y.append(hotel_reservas[h['id']])  
+            y.append(hotel_reservas.get(h['id'], 0 ))  
 
     fig, ax = plt.subplots()
 
